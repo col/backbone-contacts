@@ -12,15 +12,7 @@
 
 $(function(){
 
-//    _.templateSettings = {
-//      interpolate: /\{\{(.+?)\}\}/g,
-//        evaluate: /\{\{\=(.+?)\}\}/g
-//    };
-
     window.Contact = Backbone.Model.extend({
-        initialize: function() {
-//            alert('Contact init!');
-        },
         url: '/contacts',
         defaults: {
             "first_name": "First Name",
@@ -31,95 +23,106 @@ $(function(){
             "state": "State",
             "postcode": "Postcode",
             "country": "Country"
+        },
+        searchContent: function() {
+            return _(this.attributes).values().join(' ');
         }
     });
 
     window.ContactsList = Backbone.Collection.extend({
         model: Contact,
         url: '/contacts',
-        initialize: function() {
+        storeName: "contacts",
+        parse : function(resp, xhr) {
+            localStorage.clear();
+            localStorage.setItem(this.storeName, JSON.stringify(resp));
+            return resp;
+        },
+        fetchLocal: function(options) {
+            options = options || {};
+            var resp = localStorage.getItem(this.storeName);
+            resp = JSON.parse(resp);
+            this.reset(resp, options);
+            if (options.success) options.success(this, resp);
+        },
+        search: function(searchText) {
+            return this.filter(function(model) {
+                return model.searchContent().indexOf(searchText) != -1;
+            });
         }
     });
 
     window.ContactListView = Backbone.View.extend({
         initialize: function() {
-            this.render();
-            this.collection.bind("change", this.on_change, this);
-            this.collection.bind("add", this.on_add, this);
-            this.collection.bind("remove", this.on_remove, this);
-            this.collection.bind("destroy", this.on_destroy, this);
+            _.bindAll(this, 'render', 'renderData', 'addOne');
+            this.collection.bind("add", this.addOne);
+            this.collection.bind("reset", this.render);
             this._childViews = {};
-
-            // Load the existing items
-            collection = this;
-            this.collection.each( function(model) {
-                collection.on_add(model);
-            });
-        },
-        events: {
-
         },
         render: function() {
-//            this.el.html( ich.players({player_count: this.collection.length}) );
-//            this.updateList(this.collection)
+            this.renderData(this.collection.models);
         },
-//        updateList: function(items) {
-//            $('#contact-list').empty();
-//            collection = this
-//            _.each(items, function(item) {
-//                view = collection._childViews[item.cid];
-//                $('#contact-list').append( view.el );
-//            });
-//        },
-        on_change: function(model) {
-            alert("contact changed!");
-        }
-        ,
-        on_add: function(model) {
-            alert("contact added! - "+model);
-            view = new ContactItemView({model: model});
-            this._childViews[model.cid] = view;
+        renderData: function(data) {
+            // Clear the table
+            $(this.el).html( ich.contact_table() );
+
+            // Add the data to the able
+            _.each(data, function(task) {
+                this.addOne(task);
+            }, this);
+
+            return this;
         },
-        on_remove: function(model) {
-            alert("contact removed!");
-            this._childViews[model.cid].remove();
-        },
-        on_destroy: function(model) {
-            alert("contact destroyed!");
-            this._childViews[model.cid].remove();
+        addOne: function(model) {
+            // Check for an existing view
+            var view = this._childViews[model.cid];
+            if( !view ) {
+                // create new view if required
+                view = new ContactItemView({ model:model });
+                this._childViews[model.cid] = view;
+            }
+            // add the view to the list
+            $(this.el).append( view.render().el );
         }
     });
 
     window.ContactItemView = Backbone.View.extend({
-//        tagName: 'li',
         tagName: 'tr',
         className: 'content-item',
-//        template: _.template($('#contact-item-template').html()),
-//        template: ,
         events: {
         },
         initialize: function() {
-//            alert('ContactItemView init!');
-            $('#contact-list').append( this.el );
+            _.bindAll(this, 'render');
             this.model.bind('change', this.render, this);
             this.model.bind('destroy', this.remove, this);
-            this.render();
         },
         render: function() {
-//            $(this.el).html(this.template(this.model.toJSON()));
-//            alert("Contact item view render - "+this.model.get('first_name'));
-//            template = ich.contact({first_name: "First Name"});
-            template = ich.contact_table_item( this.model.toJSON() );
-//            alert("iCanHaz = "+template);
-//            $(this.el).html( ich.contact_item_template(this.model.toJSON()) );
-//            $(this.el).html( ich.contact({first_name: this.model.get('first_name')}) );
-            $(this.el).html( template );
+            $(this.el).html( ich.contact_table_item( this.model.toJSON() ) );
+            return this;
         }
     });
 
-    window.Contacts = new ContactsList;
-    window.Contacts.fetch({ success: function() {
-        window.MyContactList = new ContactListView({ collection: window.Contacts, el: $("#contact-list") });
-    }});
+    window.AppView = Backbone.View.extend({
+        el: $("#contacts-app"),
+        events: {
+            "keyup #search-text": "applyFilter"
+        },
+        initialize: function() {
+            this.input    = this.$("#search-text");
+
+            this.contactList = new ContactsList;
+            this.listView = new ContactListView({ collection: this.contactList, el: $("#contact-list") });
+            this.contactList.fetchLocal();
+
+//          window.Contacts.fetch({ success: function() {
+//              window.MyContactList = new ContactListView({ collection: window.Contacts, el: $("#contact-list") });
+//          }});
+
+        },
+        applyFilter: function(e) {
+            var text = this.input.val();
+            this.listView.renderData( this.contactList.search(text) );
+        }
+    });
 
 });
