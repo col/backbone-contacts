@@ -1,0 +1,32 @@
+<!--<h1>Contacts - Backbone</h1>-->
+<div class="page-header">
+  <h1>Contacts <small></small></h1>
+</div>
+<div class="row">
+  <div class="span10">
+    <h2>Contact List</h2>
+    <!--<ul id="contact-list"></ul>-->
+    <table id="contact-list">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <!-- Contact rows go here -->
+    </table>
+  </div>
+  <div class="span4">
+    <h3></h3>
+  </div>
+</div>
+
+<!-- Templates -->
+<script type="text/html" id="contact_list_item">
+  <span>Contact Item Template - {first_name}</span>
+</script>
+
+<script type="text/html" id="contact_table_item">
+  <td>{{first_name}} {{last_name}}</td>
+  <td>{{address1}}<br/>{{address2}}<br/>{{city}} &nbsp; {{postcode}}<br/>{{state}} &nbsp; {{country}}</td>
+</script>

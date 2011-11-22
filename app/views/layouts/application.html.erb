@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Contacts</title>
+  <meta name="description" content="">
+  <meta name="author" content="Colin Harris">
+
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+
+    <div class="container">
+
+      <div class="content">
+
+        <%= yield %>
+
+      </div>
+
+      <footer>
+        <p>Created By: Colin Harris</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+  </body>
+
+</html>
