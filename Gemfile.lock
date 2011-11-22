@@ -101,6 +101,9 @@ GEM
       polyglot (>= 0.3.1)
     turn (0.8.3)
       ansi
+    twitter_bootstrap_form_for (1.0.2)
+      actionpack (~> 3)
+      railties (~> 3)
     tzinfo (0.3.30)
     uglifier (1.0.4)
       execjs (>= 0.3.0)
@@ -116,4 +119,5 @@ DEPENDENCIES
   sass-rails (~> 3.1.4)
   sqlite3
   turn
+  twitter_bootstrap_form_for
   uglifier (>= 1.0.3)

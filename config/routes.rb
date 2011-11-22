@@ -1,9 +1,10 @@
 Contacts::Application.routes.draw do
-  resources :contacts do
-    collection do
-      get 'backbone'
-    end
-  end
+  resources :contacts
+  #do
+  #  collection do
+  #    get 'backbone'
+  #  end
+  #end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -55,7 +56,8 @@ Contacts::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   #root :to => 'welcome#index'
-  root :to => 'contacts#backbone'
+  #root :to => 'contacts#backbone'
+  root :to => 'contacts#index'
 
   # See how all your routes lay out with "rake routes"
 

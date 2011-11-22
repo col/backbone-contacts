@@ -1,0 +1,41 @@
+<div class="page-header">
+  <h1>Contacts <small></small></h1>
+</div>
+
+<div class="row">
+  <div class="span14">
+
+    <table class="bordered-table zebra-striped">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Address1</th>
+        <th>Address2</th>
+        <th>City</th>
+        <th>Postcode</th>
+        <th>State</th>
+        <th>Country</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+
+    <% @contacts.each do |contact| %>
+      <tr>
+        <td><%= contact.first_name %> <%= contact.last_name %></td>
+        <td><%= contact.address1 %></td>
+        <td><%= contact.address2 %></td>
+        <td><%= contact.city %></td>
+        <td><%= contact.postcode %></td>
+        <td><%= contact.state %></td>
+        <td><%= contact.country %></td>
+        <td><%= link_to 'Show', contact %> <%= link_to 'Edit', edit_contact_path(contact) %> <%= link_to 'Destroy', contact, confirm: 'Are you sure?', method: :delete %></td>
+      </tr>
+    <% end %>
+    </table>
+
+    <br />
+
+    <%= link_to 'New Contact', new_contact_path, :class => 'primary btn' %>
+
+  </div>
+</div>

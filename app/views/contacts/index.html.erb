@@ -1,37 +1,51 @@
-<h1>Listing contacts</h1>
+<div class="page-header">
+  <h1>
+    Contacts App<br/>
+    <small>Using backbone.js and localStorage</small>
+  </h1>
+</div>
+<div class="row">
+  <div id="contacts-app" class="span14">
 
-<table>
-  <tr>
-    <th>First name</th>
-    <th>Last name</th>
-    <th>Address1</th>
-    <th>Address2</th>
-    <th>City</th>
-    <th>Postcode</th>
-    <th>State</th>
-    <th>Country</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+    <div class="right">
+      <button id="reload" class="btn info">Reload</button>
+    </div>
 
-<% @contacts.each do |contact| %>
-  <tr>
-    <td><%= contact.first_name %></td>
-    <td><%= contact.last_name %></td>
-    <td><%= contact.address1 %></td>
-    <td><%= contact.address2 %></td>
-    <td><%= contact.city %></td>
-    <td><%= contact.postcode %></td>
-    <td><%= contact.state %></td>
-    <td><%= contact.country %></td>
-    <td><%= link_to 'Show', contact %></td>
-    <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
-    <td><%= link_to 'Destroy', contact, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
+    <div id="contact-search">
+        <input type="text" placeholder="Search" id="search-text"/>
+        <input type="submit" value="Search" class="btn primary"/>
+    </div>
 
-<br />
+    <table id="contact-list" class="bordered-table zebra-striped"></table>
 
-<%= link_to 'New Contact', new_contact_path %>
+    <%= link_to 'New Contact', new_contact_path, :class => 'primary btn' %>
+
+  </div>
+</div>
+
+<!-- Templates -->
+<script type="text/html" id="contact_table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th width="13%">Actions</th>
+    </tr>
+  </thead>
+</script>
+
+<script type="text/html" id="contact_table_item">
+  <td>{{first_name}} {{last_name}}</td>
+  <td><address>{{address1}}<br/>{{address2}}<br/>{{city}}, {{state}}<br/>{{country}}, {{postcode}}</address></td>
+  <td>
+    <div class="right">
+      <a href="/contacts/{{id}}" class="btn small">view</a>&nbsp;<a href="/contacts/{{id}}/edit" class="btn small">edit</a>
+    </div>
+  </td>
+</script>
+
+<script type="text/javascript">
+  $(function(){
+    window.ContactsApp = new AppView;
+  });
+</script>

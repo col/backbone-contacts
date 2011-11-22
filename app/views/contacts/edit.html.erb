@@ -1,6 +1,16 @@
-<h1>Editing contact</h1>
+<div class="page-header">
+  <h1>Contacts</h1>
+</div>
 
-<%= render 'form' %>
+<div class="row">
+  <div class="span14">
 
-<%= link_to 'Show', @contact %> |
-<%= link_to 'Back', contacts_path %>
+    <ul class="breadcrumb">
+      <li><a href="/contacts">Contacts</a> <span class="divider">/</span></li>
+      <li class="active"><%= link_to "Contact Details", edit_contact_path(@contact) %></li>
+    </ul>
+
+    <%= render 'form' %>
+
+  </div>
+</div>

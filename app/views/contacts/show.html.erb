@@ -1,45 +1,60 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <h1>Contact Details</h1>
+</div>
 
-<p>
-  <b>First name:</b>
-  <%= @contact.first_name %>
-</p>
+<div class="row">
+  <div class="span10">
 
-<p>
-  <b>Last name:</b>
-  <%= @contact.last_name %>
-</p>
+    <ul class="breadcrumb">
+      <li><a href="/contacts">Contacts</a> <span class="divider">/</span></li>
+      <li class="active"><%= link_to "Contact Details", @contact %></li>
+    </ul>
 
-<p>
-  <b>Address1:</b>
-  <%= @contact.address1 %>
-</p>
+    <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Address2:</b>
-  <%= @contact.address2 %>
-</p>
+    <p>
+      <b>First name:</b>
+      <%= @contact.first_name %>
+    </p>
 
-<p>
-  <b>City:</b>
-  <%= @contact.city %>
-</p>
+    <p>
+      <b>Last name:</b>
+      <%= @contact.last_name %>
+    </p>
 
-<p>
-  <b>Postcode:</b>
-  <%= @contact.postcode %>
-</p>
+    <p>
+      <b>Address1:</b>
+      <%= @contact.address1 %>
+    </p>
 
-<p>
-  <b>State:</b>
-  <%= @contact.state %>
-</p>
+    <p>
+      <b>Address2:</b>
+      <%= @contact.address2 %>
+    </p>
 
-<p>
-  <b>Country:</b>
-  <%= @contact.country %>
-</p>
+    <p>
+      <b>City:</b>
+      <%= @contact.city %>
+    </p>
+
+    <p>
+      <b>Postcode:</b>
+      <%= @contact.postcode %>
+    </p>
+
+    <p>
+      <b>State:</b>
+      <%= @contact.state %>
+    </p>
+
+    <p>
+      <b>Country:</b>
+      <%= @contact.country %>
+    </p>
 
 
-<%= link_to 'Edit', edit_contact_path(@contact) %> |
-<%= link_to 'Back', contacts_path %>
+    <%= link_to 'Edit', edit_contact_path(@contact), :class => "btn primary" %> |
+    <%= link_to 'Back', contacts_path, :class => "btn" %>
+
+  </div>
+</div>

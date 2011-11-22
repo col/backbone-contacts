@@ -56,3 +56,11 @@ body {
 .topbar .btn {
     border: 0;
 }
+
+#contact-search {
+    margin-bottom: 20px;
+}
+
+.right {
+    float: right;
+}
