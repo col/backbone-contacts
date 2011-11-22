@@ -1,4 +1,0 @@
-== Backbone-Contacts
-
-This is a simple application for me to try out Backbone.js. The app aims to load contact records from a remote server and cache them using local storage. I'd also like to add searching and filtering as well as pagination etc.
-
