@@ -18,6 +18,18 @@
 
     <table id="contact-list" class="bordered-table zebra-striped"></table>
 
+    <div class="pagination">
+        <ul id="pagination">
+            <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li class="next"><a href="#">Next &rarr;</a></li>
+        </ul>
+    </div>
+
     <%= link_to 'New Contact', new_contact_path, :class => 'primary btn' %>
 
   </div>
@@ -34,9 +46,15 @@
   </thead>
 </script>
 
+<script type="text/html" id="pagination_item">
+  <li class="{{class}}"><a href="#">{{content}}</a></li>
+</script>
+
 <script type="text/html" id="contact_table_item">
   <td>{{first_name}} {{last_name}}</td>
-  <td><address>{{address1}}<br/>{{address2}}<br/>{{city}}, {{state}}<br/>{{country}}, {{postcode}}</address></td>
+  <td><address>{{address1}}<br/>
+    <!--{{address2}}<br/>-->
+    {{city}}, {{state}}<br/>{{country}}, {{postcode}}</address></td>
   <td>
     <div class="right">
       <a href="/contacts/{{id}}" class="btn small">view</a>&nbsp;<a href="/contacts/{{id}}/edit" class="btn small">edit</a>

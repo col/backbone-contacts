@@ -3,7 +3,7 @@
 </div>
 
 <div class="row">
-  <div class="span10">
+  <div class="span14">
 
     <ul class="breadcrumb">
       <li><a href="/contacts">Contacts</a> <span class="divider">/</span></li>
@@ -23,17 +23,17 @@
     </p>
 
     <p>
-      <b>Address1:</b>
+      <b>Street Address:</b>
       <%= @contact.address1 %>
     </p>
 
-    <p>
-      <b>Address2:</b>
-      <%= @contact.address2 %>
-    </p>
+    <!--<p>-->
+      <!--<b>Address2:</b>-->
+      <!--<%#= @contact.address2 %>-->
+    <!--</p>-->
 
     <p>
-      <b>City:</b>
+      <b>Town / City:</b>
       <%= @contact.city %>
     </p>
 
@@ -53,7 +53,7 @@
     </p>
 
 
-    <%= link_to 'Edit', edit_contact_path(@contact), :class => "btn primary" %> |
+    <%= link_to 'Edit', edit_contact_path(@contact), :class => "btn primary" %>
     <%= link_to 'Back', contacts_path, :class => "btn" %>
 
   </div>

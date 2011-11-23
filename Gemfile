@@ -7,6 +7,8 @@ gem 'rails', '3.1.1'
 
 gem 'sqlite3'
 gem 'twitter_bootstrap_form_for'
+gem 'faker'
+gem 'will_paginate'
 
 group :production do
   # gems specifically for Heroku go here

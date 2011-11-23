@@ -6,6 +6,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require range
 //= require backbone/underscore
 //= require backbone/backbone
 //= require_tree .
